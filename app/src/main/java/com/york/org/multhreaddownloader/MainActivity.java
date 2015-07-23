@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.york.org.multhreaddownloader.network.DownloadProgressListener;
 import com.york.org.multhreaddownloader.network.FileDownloader;
+import com.york.org.multhreaddownloader.network.NetStateUtil;
 
 import java.io.File;
 
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
     private EditText downloadpathText;
     private TextView resultView;
     private ProgressBar progressBar;
+    private Toast mToast = null;
 
     /**
      * 当Handler被创建会关联到创建它的当前线程的消息队列，该类用于往消息队列发送消息
@@ -70,7 +72,15 @@ public class MainActivity extends Activity {
                 System.out.println(Environment.getExternalStorageState()+"------"+Environment.MEDIA_MOUNTED);
 
                 if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-                    download(path, Environment.getExternalStorageDirectory());
+                    if(NetStateUtil.getNetType(MainActivity.this).equals(NetStateUtil.NetType.CONN_TYPE_WIFI)){
+                        download(path, Environment.getExternalStorageDirectory());
+                    }else{
+                        if(mToast == null){
+                            mToast=Toast.makeText(MainActivity.this, R.string.networkerror, Toast.LENGTH_SHORT);
+                        }
+                        mToast.show();
+                    }
+
                 }else{
                     Toast.makeText(MainActivity.this, R.string.sdcarderror, Toast.LENGTH_LONG).show();
                 }

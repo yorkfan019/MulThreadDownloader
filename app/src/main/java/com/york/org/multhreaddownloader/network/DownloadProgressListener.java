@@ -2,6 +2,6 @@ package com.york.org.multhreaddownloader.network;
 
 
 public interface DownloadProgressListener {
-    public void onDownloadSize(int size);
+    void onDownloadSize(int size);
 }
 

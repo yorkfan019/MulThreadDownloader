@@ -11,7 +11,7 @@
         android:text="@string/path"/>
     <EditText
         android:id="@+id/path"
-        android:text="http://images.cnblogs.com/cnblogs_com/hanyonglu/2012-02-19_235654.jpg"
+        android:text="http://dldir1.qq.com/weixin/android/weixin622android580.apk"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
     </EditText>
