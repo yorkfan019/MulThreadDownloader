@@ -1,4 +1,4 @@
-package com.york.org.multhreaddownloader.network;
+package com.york.org.multhreaddownloader.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -9,6 +9,22 @@ import android.telephony.TelephonyManager;
  * 网络状态util
  */
 public class NetStateUtil {
+
+
+	public static boolean isNetworkAvailable(Context context){
+		TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+		telephonyManager.getNetworkType();
+		ConnectivityManager connectivityManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivityManager != null) {
+			NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+			if (info != null && info.isAvailable()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * 
